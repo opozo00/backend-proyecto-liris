@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Cargo = sequelize.define('Cargo', {
-  id_cargo: {
+const Categoria_Manual = sequelize.define('Categoria_Manual', {
+  id_categoria: {
     autoIncrement: true,
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -13,39 +13,42 @@ const Cargo = sequelize.define('Cargo', {
     allowNull: false,
     unique: true
   },
-  nivel: {
-    type: DataTypes.ENUM('Junior','Senior','Director'),
-    allowNull: false
-  },
-  id_departamento: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'departamento',
-      key: 'id_departamento'
-    }
+  descripcion: {
+    type: DataTypes.TEXT,
+    allowNull: true
   }
 }, {
-  tableName: 'cargo',
+  tableName: 'categoria_manual',
   timestamps: false
 });
 
-module.exports = Cargo;
+module.exports = Categoria_Manual;
 
 
 
 
 
-
-
-
-
+// const Sequelize = require('sequelize');
 // module.exports = function(sequelize, DataTypes) {
-//   return sequelize.define('cargo', {
-    
+//   return sequelize.define('categoria_manual', {
+//     id_categoria: {
+//       autoIncrement: true,
+//       type: DataTypes.INTEGER,
+//       allowNull: false,
+//       primaryKey: true
+//     },
+//     nombre: {
+//       type: DataTypes.STRING(100),
+//       allowNull: false,
+//       unique: "nombre"
+//     },
+//     descripcion: {
+//       type: DataTypes.TEXT,
+//       allowNull: true
+//     }
 //   }, {
 //     sequelize,
-//     tableName: 'cargo',
+//     tableName: 'categoria_manual',
 //     timestamps: false,
 //     indexes: [
 //       {
@@ -53,7 +56,7 @@ module.exports = Cargo;
 //         unique: true,
 //         using: "BTREE",
 //         fields: [
-//           { name: "id_cargo" },
+//           { name: "id_categoria" },
 //         ]
 //       },
 //       {
@@ -64,15 +67,6 @@ module.exports = Cargo;
 //           { name: "nombre" },
 //         ]
 //       },
-//       {
-//         name: "id_departamento",
-//         using: "BTREE",
-//         fields: [
-//           { name: "id_departamento" },
-//         ]
-//       },
 //     ]
 //   });
 // };
-
-

@@ -14,5 +14,8 @@
     "express": "^5.1.0",
     "mysql2": "^3.14.0",
     "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "sequelize-auto": "^0.8.8"
   }
 }
