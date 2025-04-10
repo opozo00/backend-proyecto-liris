@@ -6,4 +6,8 @@ router.get('/', manualController.getManuales);
 
 router.get(':id', manualController.getManual);
 
+router.put(':id', manualController.updateManual);
+
+router.delete(':id', manualController.deleteManual);
+
 module.exports = router;

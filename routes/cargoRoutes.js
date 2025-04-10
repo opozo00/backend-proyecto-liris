@@ -4,4 +4,10 @@ const cargoController = require('../controllers/cargoController');
 
 router.get('/', cargoController.getCargos);
 
+router.get('/:id', cargoController.getCargo);
+
+router.put('/', cargoController.updateCargo);
+
+router.delete('/:id', cargoController.deleteCargo);
+
 module.exports = router;

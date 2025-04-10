@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const categoriaManualController = require('../controllers/categoriaManualController');
 
-router.get('/', categoriaManualController.getCategoriaManual);
+router.get('/', categoriaManualController.getCategoriasManual);
+
+router.get('/:id', categoriaManualController.getCategoriaManual);
+
+router.put('/', categoriaManualController.updateCategoriaManual);
+
+router.delete('/:id', categoriaManualController.deleteCategoriaManual);
 
 module.exports = router;
