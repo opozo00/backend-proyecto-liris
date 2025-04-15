@@ -1,10 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const sequelize = require('./config/database');
+const db = require('./models');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 // Middleware para JSON
 app.use(express.json());
 
@@ -29,7 +32,7 @@ const empleadoManualRoutes = require('./routes/empleadoManualRoutes');
 app.use('/api/empleadomanual', empleadoManualRoutes);
 
 // Sincronizar base de datos
-sequelize.sync()
+db.sequelize.authenticate()
     .then(() => console.log('Base de datos conectada'))
     .catch(err => console.error('Error al conectar BD:', err));
 

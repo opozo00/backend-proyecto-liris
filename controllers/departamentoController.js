@@ -1,4 +1,5 @@
-const Departamento = require('../models/departamento');
+const db = require('../models');
+const Departamento = db.Departamento;
 
 exports.getDepartamentos = async (req, res) => {
     try {

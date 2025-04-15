@@ -1,8 +1,16 @@
-const Manual = require('../models/manual');
+const db = require('../models');
+const Manual = db.Manual;
 
 exports.getManuales = async (req, res) => {
     try {
-        const manuales = await Manual.findAll();
+        const manuales = await Manual.findAll(
+            {
+                include: [
+                    { model: db.CategoriaManual, as: 'categoria' },
+                    { model: db.Departamento, as: 'departamento' },
+                ]
+            }
+        );
         res.json(manuales);
     } catch (error) {
         res.status(500).json({ message: "Error al obtener manuales", error });
@@ -10,7 +18,14 @@ exports.getManuales = async (req, res) => {
 };
 exports.getManual = async (req, res) => {
     try {
-        const manual = await Manual.findByPk(req.params.id);
+        const manual = await Manual.findByPk(req.params.id,
+            {
+                include: [
+                    { model: db.CategoriaManual, as: 'categoria' },
+                    { model: db.Departamento, as: 'departamento' },
+                ]
+            }
+        );
         if (!manual) {
             res.status(404).json({ message: 'Manual no encontrado.' })
         } else {

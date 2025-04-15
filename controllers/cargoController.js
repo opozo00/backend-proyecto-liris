@@ -1,8 +1,15 @@
-const Cargo = require('../models/cargo');
+const db = require('../models');
+const Cargo = db.Cargo;
 
 exports.getCargos = async (req, res) => {
     try {
-        const cargos = await Cargo.findAll();
+        const cargos = await Cargo.findAll(
+            {
+                include: [
+                    { model: db.Departamento, as: 'departamento' }
+                ]
+            }
+        );
         res.json(cargos);
     } catch (error) {
         res.status(500).json({ message: "Error al obtener cargos", error });
@@ -10,7 +17,13 @@ exports.getCargos = async (req, res) => {
 };
 exports.getCargo = async (req, res) => {
     try {
-        const cargo = await Cargo.findByPk(req.params.id);
+        const cargo = await Cargo.findByPk(req.params.id,
+            {
+                include: [
+                    { model: db.Departamento, as: 'departamento' }
+                ]
+            }
+        );
         if (!cargo) {
             res.status(404).json({ message: "Cargo no encontrado." })
         } else {

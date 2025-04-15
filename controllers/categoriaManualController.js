@@ -1,4 +1,5 @@
-const CategoriaManual = require('../models/categoria_manual');
+const db = require('../models');
+const CategoriaManual = db.CategoriaManual;
 
 exports.getCategoriasManual = async (req, res) => {
     try {

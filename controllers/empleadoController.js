@@ -1,8 +1,23 @@
-const Empleado = require('../models/empleado');
+const db = require('../models');
+const Empleado = db.Empleado;
 
 exports.getEmpleados = async (req, res) => {
     try {
-        const empleados = await Empleado.findAll();
+        const empleados = await Empleado.findAll(
+            {
+                include: [
+                    { model: db.Cargo, as: 'cargo' },
+                    { model: db.Departamento, as: 'departamento' },
+                    {
+                        model: db.Empleado,
+                        as: 'jefe',
+                        include: [
+                            { model: db.Cargo, as: 'cargo' }
+                        ]
+                    },
+                ]
+            }
+        );
         res.json(empleados);
     } catch (error) {
         res.status(500).json({ message: "Error al obtener empleados", error });
@@ -10,7 +25,21 @@ exports.getEmpleados = async (req, res) => {
 };
 exports.getEmpleado = async (req, res) => {
     try {
-        const empleado = await Empleado.findByPk(req.params.id);
+        const empleado = await Empleado.findByPk(req.params.id,
+            {
+                include: [
+                    { model: db.Cargo, as: 'cargo' },
+                    { model: db.Departamento, as: 'departamento' },
+                    {
+                        model: db.Empleado,
+                        as: 'jefe',
+                        include: [
+                            { model: db.Cargo, as: 'cargo' }
+                        ]
+                    },
+                ]
+            }
+        );
         if (!empleado) {
             res.status(404).json({ message: 'Usuario no encontrado.' })
         } else {

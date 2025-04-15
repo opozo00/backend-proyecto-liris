@@ -1,8 +1,16 @@
-const EmpleadoManual = require('../models/empleado_manual');
+const db = require('../models');
+const EmpleadoManual = db.EmpleadoManual;
 
 exports.getEmpleadosManual = async (req, res) => {
     try {
-        const empleadosManuales = await EmpleadoManual.findAll();
+        const empleadosManuales = await EmpleadoManual.findAll(
+            {
+                include: [
+                    { model: db.Empleado, as: 'empleado' },
+                    { model: db.Manual, as: 'manual' }
+                ]
+            }
+        );
         res.json(empleadosManuales);
     } catch (error) {
         res.status(500).json({ message: "Error al obtener manuales de empleados", error });
@@ -11,7 +19,14 @@ exports.getEmpleadosManual = async (req, res) => {
 
 exports.getEmpleadoManuales = async (req, res) => {
     try {
-        const empleadoManuales = await EmpleadoManual.findByPk(req.params.id);
+        const empleadoManuales = await EmpleadoManual.findByPk(req.params.id,
+            {
+                include: [
+                    { model: db.Empleado, as: 'empleado' },
+                    { model: db.Manual, as: 'manual' }
+                ]
+            }
+        );
         if (!empleadoManuales) {
             res.status(404).json({ message: "Empleado-Manual no encontrado" });
         } else {
