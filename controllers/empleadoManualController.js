@@ -7,7 +7,12 @@ exports.getEmpleadosManual = async (req, res) => {
             {
                 include: [
                     { model: db.Empleado, as: 'empleado' },
-                    { model: db.Manual, as: 'manual' }
+                    {
+                        model: db.Manual, as: 'manual',
+                        include: [
+                            { model: db.CategoriaManual, as: 'categoria' }
+                        ]
+                    }
                 ]
             }
         );
