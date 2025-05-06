@@ -6,7 +6,7 @@ router.get('/', cargoController.getCargos);
 
 router.get('/:id', cargoController.getCargo);
 
-router.put('/', cargoController.updateCargo);
+router.put('/:id', cargoController.updateCargo);
 
 router.delete('/:id', cargoController.deleteCargo);
 

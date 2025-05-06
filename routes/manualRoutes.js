@@ -4,10 +4,10 @@ const manualController = require('../controllers/manualController');
 
 router.get('/', manualController.getManuales);
 
-router.get(':id', manualController.getManual);
+router.get('/:id', manualController.getManual);
 
-router.put(':id', manualController.updateManual);
+router.put('/:id', manualController.updateManual);
 
-router.delete(':id', manualController.deleteManual);
+router.delete('/:id', manualController.deleteManual);
 
 module.exports = router;

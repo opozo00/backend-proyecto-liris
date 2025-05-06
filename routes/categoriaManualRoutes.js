@@ -6,7 +6,7 @@ router.get('/', categoriaManualController.getCategoriasManual);
 
 router.get('/:id', categoriaManualController.getCategoriaManual);
 
-router.put('/', categoriaManualController.updateCategoriaManual);
+router.put('/:id', categoriaManualController.updateCategoriaManual);
 
 router.delete('/:id', categoriaManualController.deleteCategoriaManual);
 
